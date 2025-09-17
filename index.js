@@ -32,32 +32,34 @@ do {
             break
 
         case '2':
-            names.forEach((el, i) => {
-                data[el] = products[i]
-            })
+            let choseTable
+            do {
+                names.forEach((el, i) => {
+                    data[el] = products[i]
+                })
 
-            console.table(data)
+                console.table(data)
 
-            let choseTable = prompt(`
+                choseTable = prompt(`
                 Escolha uma opção: 
                 
                 1: Verificar retabilidade dos produtos
                 2: Voltar
                 `)
 
-            if (choseTable == '1') {
-                let dataProfitable = {}
-                names.forEach((el, i) => {
-                    dataProfitable[el] = products[i].profitable()
-                })
-                console.log(dataProfitable)
-            }
+                if (choseTable == '1') {
+                    let dataProfitable = {}
+                    names.forEach((el, i) => {
+                        dataProfitable[el] = data[el].profitable()
+                    })
+                    console.table(dataProfitable)
+                }
+            } while (choseTable != '2')
 
             break
 
         case '3':
             run = false
-
             break
     }
 
