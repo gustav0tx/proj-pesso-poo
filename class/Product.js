@@ -32,7 +32,7 @@ class Product {
         if(this.hasPositiveBank) {
             return `${this.name} é um produto rentavel, e tem R$${this.bank} de lucro, +${(this.bank / this.sellPrice) * 100}%`
         }  else {
-            return `${this.name} não é um produto rentavel, e tem R$${this.bank} de defic, -${(this.sellPrice / this.bank) * 100}%`
+            return `${this.name} não é um produto rentavel, e tem R$${this.bank} de defic, ${(this.bank / this.sellPrice) * 100}%`
         }
     }
 

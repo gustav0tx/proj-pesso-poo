@@ -1,4 +1,7 @@
 const Product = require('./class/Product')
+const AccontNegative = require('./class/AccontNegative')
+const AccontPositive = require('./class/AccontPositive')
+const Accont = require('./class/Accont')
 const prompt = require('prompt-sync')()
 
 let run = true
@@ -38,23 +41,44 @@ do {
                     data[el] = products[i]
                 })
 
-                console.table(data)
-
                 choseTable = prompt(`
                 Escolha uma opção: 
                 
                 1: Verificar retabilidade dos produtos
-                2: Voltar
+                2: Verificar tabela de produtos
+                3: Verificar Saldo total
+                4: Voltar
                 `)
 
-                if (choseTable == '1') {
-                    let dataProfitable = {}
-                    names.forEach((el, i) => {
-                        dataProfitable[el] = data[el].profitable()
-                    })
-                    console.table(dataProfitable)
+                switch (choseTable) {
+                    case '1':
+                        let dataProfitable = {}
+                        names.forEach((el, i) => {
+                            dataProfitable[el] = data[el].profitable()
+                        })
+                        console.table(dataProfitable)
+                        break
+                    case '2':
+                        console.table(data)
+                        break
+                    case '3':
+                        let balance = 0
+                        let accont;
+
+                        products.forEach(el => {
+                            balance += el.bankPack
+                        })
+
+                        if(balance > -1){
+                            accont = new AccontPositive(products)
+                        } else {
+                            accont = new AccontNegative(products)
+                        }
+
+                        console.log(`Seu saldo é de R$${accont.calcBalance()}`)
+                        break
                 }
-            } while (choseTable != '2')
+            } while (choseTable != '4')
 
             break
 
